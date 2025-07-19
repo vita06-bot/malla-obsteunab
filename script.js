@@ -27,7 +27,6 @@ const malla = {
     { nombre: "Integrador I: Cuidados Médico-Quirúrgicos de matronería" },
     { nombre: "Inglés IV" },
   ],
-  // Puedes seguir añadiendo más semestres aquí siguiendo la misma estructura
 };
 
 const estadoRamos = JSON.parse(localStorage.getItem("estadoRamos")) || {};
@@ -49,10 +48,7 @@ function crearMalla() {
       divRamo.textContent = ramo.nombre;
       divRamo.classList.add("ramo");
       
-      // Chequea si el ramo está aprobado
       const estaAprobado = estadoRamos[ramo.nombre];
-      
-      // Chequea si los requisitos están aprobados (los que abren este ramo)
       const requisitosListos = puedeAprobar(ramo);
       
       if (estaAprobado) {
@@ -63,8 +59,6 @@ function crearMalla() {
       
       divRamo.addEventListener("click", () => {
         if (divRamo.classList.contains("bloqueado")) return;
-        
-        // Cambiar estado aprobado/no aprobado
         const nuevoEstado = !divRamo.classList.contains("aprobado");
         estadoRamos[ramo.nombre] = nuevoEstado;
         guardarEstado();
@@ -79,11 +73,7 @@ function crearMalla() {
 }
 
 function puedeAprobar(ramo) {
-  // Un ramo se puede aprobar si todos sus requisitos están aprobados
-  // En esta estructura, el requisito es aprobar el ramo que lo "abre"
-  // Así que buscamos todos los ramos que abren este ramo
   const requisitos = [];
-
   for (const sem in malla) {
     for (const r of malla[sem]) {
       if (r.abre && r.abre.includes(ramo.nombre)) {
@@ -91,7 +81,7 @@ function puedeAprobar(ramo) {
       }
     }
   }
-
+  if (requisitos.length === 0) return true; // Sin requisitos, desbloqueado
   return requisitos.every(req => estadoRamos[req]);
 }
 
