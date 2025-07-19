@@ -1,53 +1,78 @@
 body {
   font-family: 'Segoe UI', sans-serif;
   background-color: #fff0f5;
-  color: #333;
   margin: 0;
-  padding: 20px;
+  padding: 2rem;
+  color: #333;
 }
 
 h1 {
+  color: #d63384;
   text-align: center;
-  color: #c2185b;
-  margin-bottom: 30px;
+  margin-bottom: 2rem;
 }
 
-.malla {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 15px;
-  max-width: 1200px;
-  margin: auto;
+.semestre {
+  margin-bottom: 2rem;
+}
+
+.semestre-label {
+  font-weight: bold;
+  color: #c2185b;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.ramos-fila {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #ffc0cb;
+}
+
+.ramos-fila::-webkit-scrollbar {
+  height: 8px;
+}
+
+.ramos-fila::-webkit-scrollbar-thumb {
+  background-color: #f3a6c1;
+  border-radius: 10px;
 }
 
 .ramo {
-  background-color: #f8bbd0;
-  padding: 15px;
+  background-color: #fce4ec;
+  border: 2px solid #f8bbd0;
   border-radius: 12px;
+  padding: 1rem;
+  min-width: 180px;
   text-align: center;
-  font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  cursor: not-allowed;
-  opacity: 0.6;
-  transition: all 0.3s ease;
-  border: 2px solid #f48fb1;
-}
-
-.ramo.activo {
   cursor: pointer;
-  opacity: 1;
-  background-color: #f06292;
-  border: 2px solid #ec407a;
-  color: white;
+  transition: 0.3s ease;
+  user-select: none;
 }
 
-.ramo.completado {
-  background-color: #c2185b;
-  border-color: #ad1457;
-  color: white;
+.ramo:hover:not(.bloqueado):not(.aprobado) {
+  background-color: #f8bbd0;
+}
+
+.ramo.aprobado {
+  background-color: #d1e7dd;
+  border-color: #28a745;
+  color: #155724;
+  cursor: default;
   text-decoration: line-through;
 }
 
-.ramo:hover.activo {
-  transform: scale(1.03);
+.ramo.bloqueado {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+footer {
+  margin-top: 3rem;
+  text-align: center;
+  color: #999;
+  font-size: 0.9rem;
 }
